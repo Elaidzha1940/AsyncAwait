@@ -8,10 +8,12 @@
 //  */
 
 /*
-// Async/Await
-// @escaping
-// Combine
-*/
+ // Swift Concurrency
+ 
+ // Async/Await
+ // @escaping
+ // Combine
+ */
 
 import SwiftUI
 
@@ -21,29 +23,32 @@ class DownloadImageAsyncViewModel: ObservableObject {
     
     func fetchImage() {
         loader .dowloadWithEscaping { [weak self] image, error in
-            if let image = image {
+            DispatchQueue.main.async {
                 self?.image = image
             }
         }
     }
 }
 
-class DownloadImageAsyncImageLoader: ObservableObject {
+class DownloadImageAsyncImageLoader {
     
-    let url = URL(string: "https://github.com/unsplash/unsplash-photopicker-ios.git")!
+    let url = URL(string: "https://source.unsplash.com/random/300×400")!
+    
+    func handleResponse(data: Data?, response: URLResponse?) -> UIImage? {
+        guard
+            let data = data,
+            let image = UIImage(data: data),
+            let response = response as? HTTPURLResponse,
+            response.statusCode >= 200 && response.statusCode < 300 else {
+            return nil
+        }
+        return image
+    }
     
     func dowloadWithEscaping(completionHandler: @escaping (_ image: UIImage?, _ error: Error?) -> Void) {
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard
-                let data = data,
-                    let image = UIImage(data: data),
-                let response = response as? HTTPURLResponse,
-                response.statusCode >= 200 && response.statusCode < 300 else {
-                completionHandler(nil, error)
-                return
-            }
-            
-            completionHandler(image, nil)
+        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            let image = self?.handleResponse(data: data, response: response)
+            completionHandler(image, error)
         }
         .resume()
     }
@@ -59,8 +64,8 @@ struct DownloadImageAsync: View {
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 200, height: 200)
                     .cornerRadius(15)
+                    .frame(width: 300, height: 400)
             }
         }
         .onAppear {
