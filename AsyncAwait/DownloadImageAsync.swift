@@ -23,6 +23,24 @@ class DownloadImageAsyncViewModel: ObservableObject {
     }
 }
 
+class DownloadImageAsyncImageLoader: ObservableObject {
+    
+    let url = URL(string: "https://github.com/unsplash/unsplash-photopicker-ios.git")!
+    
+    func dowloadWithEscaping() {
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard
+                let data = data,
+                    let image = UIImage(data: data),
+                let response = response as? HTTPURLResponse,
+                response.statusCode >= 200 && response.statusCode < 300 else {
+                return
+            }
+        }
+        .resume()
+    }
+}
+
 struct DownloadImageAsync: View {
     @StateObject private var viewModel = DownloadImageAsyncViewModel()
     
@@ -36,6 +54,9 @@ struct DownloadImageAsync: View {
                     .frame(width: 200, height: 200)
                     .cornerRadius(15)
             }
+        }
+        .onAppear {
+            viewModel.fetchImage()
         }
     }
 }
