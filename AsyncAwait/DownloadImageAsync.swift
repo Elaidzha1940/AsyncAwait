@@ -52,6 +52,11 @@ class DownloadImageAsyncImageLoader {
         }
         .resume()
     }
+    
+    func downloadWithCombine() {
+        URLSession.shared.dataTaskPublisher(for: url)
+            .map(<#T##keyPath: KeyPath<(data: Data, response: URLResponse), T>##KeyPath<(data: Data, response: URLResponse), T>#>)
+    }
 }
 
 struct DownloadImageAsync: View {
