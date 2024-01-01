@@ -17,9 +17,14 @@ import SwiftUI
 
 class DownloadImageAsyncViewModel: ObservableObject {
     @Published var image: UIImage? = nil
+    let loader = DownloadImageAsyncImageLoader()
     
     func fetchImage() {
-        self.image = UIImage(systemName: "person")
+        loader .dowloadWithEscaping { [weak self] image, error in
+            if let image = image {
+                self?.image = image
+            }
+        }
     }
 }
 
@@ -27,15 +32,18 @@ class DownloadImageAsyncImageLoader: ObservableObject {
     
     let url = URL(string: "https://github.com/unsplash/unsplash-photopicker-ios.git")!
     
-    func dowloadWithEscaping() {
+    func dowloadWithEscaping(completionHandler: @escaping (_ image: UIImage?, _ error: Error?) -> Void) {
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard
                 let data = data,
                     let image = UIImage(data: data),
                 let response = response as? HTTPURLResponse,
                 response.statusCode >= 200 && response.statusCode < 300 else {
+                completionHandler(nil, error)
                 return
             }
+            
+            completionHandler(image, nil)
         }
         .resume()
     }
