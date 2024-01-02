@@ -17,9 +17,7 @@ https://unsplash.com/developers
         }
         .resume()
     }
- ````````````````````
-
-````````````````````
+ 
   //MARK: Combine
 
     func downloadWithCombine() -> AnyPublisher<UIImage?, Error> {
@@ -28,9 +26,7 @@ https://unsplash.com/developers
             .mapError({ $0 })
             .eraseToAnyPublisher()
     }
-````````````````````
 
-````````````````````
   //MARK: async/await
 
     func downloadWithAsync() async throws -> UIImage? {
