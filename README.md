@@ -41,7 +41,6 @@ https://source.unsplash.com/random/300×400
         }
     }
 
-`````````````````````````ruby
 Important ✌🏻 Async/Await: 
 ========================
 
