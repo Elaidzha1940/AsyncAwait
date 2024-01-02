@@ -1,16 +1,16 @@
 Swift Concurrency: Async/Await, Combine, MainActor, Task, @escaping...
 ============
 
+ ```````````````````````ruby
 Links for Random Images: 
 ------------------------
- ```````````````````````ruby
 
 https://awik.io/generate-random-images-unsplash-without-using-api/ 
 
 https://unsplash.com/developers
-~~~~~~~
-
- ```````````````````````ruby
+````````````````````````````````
+ 
+```````````````````````ruby
   //MARK: @escaping
 
     func dowloadWithEscaping(completionHandler: @escaping (_ image: UIImage?, _ error: Error?) -> Void) {
