@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E4D9A1DD2B444FC800CBEB31 /* AsyncAwaitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D9A1DC2B444FC800CBEB31 /* AsyncAwaitView.swift */; };
 		E4DF25152B4307F500D0D8E5 /* AsyncAwaitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DF25142B4307F500D0D8E5 /* AsyncAwaitApp.swift */; };
 		E4DF25172B4307F500D0D8E5 /* DownloadImageAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DF25162B4307F500D0D8E5 /* DownloadImageAsync.swift */; };
 		E4DF25192B4307F600D0D8E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4DF25182B4307F600D0D8E5 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E4D9A1DC2B444FC800CBEB31 /* AsyncAwaitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAwaitView.swift; sourceTree = "<group>"; };
 		E4DF25112B4307F500D0D8E5 /* AsyncAwait.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AsyncAwait.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4DF25142B4307F500D0D8E5 /* AsyncAwaitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAwaitApp.swift; sourceTree = "<group>"; };
 		E4DF25162B4307F500D0D8E5 /* DownloadImageAsync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadImageAsync.swift; sourceTree = "<group>"; };
@@ -53,6 +55,7 @@
 			children = (
 				E4DF25142B4307F500D0D8E5 /* AsyncAwaitApp.swift */,
 				E4DF25162B4307F500D0D8E5 /* DownloadImageAsync.swift */,
+				E4D9A1DC2B444FC800CBEB31 /* AsyncAwaitView.swift */,
 				E4DF25182B4307F600D0D8E5 /* Assets.xcassets */,
 				E4DF251A2B4307F600D0D8E5 /* Preview Content */,
 			);
@@ -137,6 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4D9A1DD2B444FC800CBEB31 /* AsyncAwaitView.swift in Sources */,
 				E4DF25172B4307F500D0D8E5 /* DownloadImageAsync.swift in Sources */,
 				E4DF25152B4307F500D0D8E5 /* AsyncAwaitApp.swift in Sources */,
 			);
