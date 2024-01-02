@@ -40,13 +40,14 @@ https://source.unsplash.com/random/300×400
             throw error
         }
     }
+```````````````````````
 
 Important ✌🏻 Async/Await: 
 -------------------------
 
-```````````````````````
+```````````````````````ruby
+
 Swift 5.0
-----------
 
  func addTitle() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -55,10 +56,10 @@ Swift 5.0
     }
 
 Swift 5.5
-----------
 
 func addTitle() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.dataArray.append("Title1 : \(Task.currentPriority)")
         }
     }
+```````````````````````
