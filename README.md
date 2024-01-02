@@ -20,7 +20,7 @@ https://awik.io/generate-random-images-unsplash-without-using-api/
         .resume()
     }
  
-  //MARK: Combine
+  //MARK: combine
 
     func downloadWithCombine() -> AnyPublisher<UIImage?, Error> {
         URLSession.shared.dataTaskPublisher(for: url)
