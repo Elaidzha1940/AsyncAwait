@@ -44,7 +44,7 @@ https://source.unsplash.com/random/300×400
 Important ✌🏻 Async/Await: 
 -------------------------
 
-````````````````````````ruby
+```````````````````````
 Swift 5.0
 ----------
 
@@ -62,4 +62,3 @@ func addTitle() {
             self.dataArray.append("Title1 : \(Task.currentPriority)")
         }
     }
-```````````````````````
