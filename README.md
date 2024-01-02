@@ -7,7 +7,6 @@ Links for Random Images:
 ```````````````````````ruby
 https://awik.io/generate-random-images-unsplash-without-using-api/ 
 
-https://unsplash.com/developers
 ````````````````````````````````
  
 ```````````````````````ruby
