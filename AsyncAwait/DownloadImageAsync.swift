@@ -24,18 +24,25 @@ class DownloadImageAsyncViewModel: ObservableObject {
     var cancellables = Set<AnyCancellable>()
     
     func fetchImage() {
+        
+        //MARK: @escaping
+        
         //        loader .dowloadWithEscaping { [weak self] image, error in
         //
         //        }
         
-        loader.downloadWithCombine()
-            .receive(on: DispatchQueue.main)
-            .sink { _ in
-                
-            } receiveValue: { [weak self] image in
-                self?.image = image
-            }
-            .store(in: &cancellables )
+        //MARK: Combine
+        
+//        loader.downloadWithCombine()
+//            .receive(on: DispatchQueue.main)
+//            .sink { _ in
+//                
+//            } receiveValue: { [weak self] image in
+//                self?.image = image
+//            }
+//            .store(in: &cancellables )
+        
+        //MARK: Async/Await
         
     }
 }
@@ -54,7 +61,8 @@ class DownloadImageAsyncImageLoader {
         }
         return image
     }
-    
+    //MARK: @escaping
+
     func dowloadWithEscaping(completionHandler: @escaping (_ image: UIImage?, _ error: Error?) -> Void) {
         URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
             let image = self?.handleResponse(data: data, response: response)
@@ -63,6 +71,8 @@ class DownloadImageAsyncImageLoader {
         .resume()
     }
     
+    //MARK: Combine
+
     func downloadWithCombine() -> AnyPublisher<UIImage?, Error> {
         URLSession.shared.dataTaskPublisher(for: url)
             .map(handleResponse)
@@ -70,7 +80,17 @@ class DownloadImageAsyncImageLoader {
             .eraseToAnyPublisher()
     }
     
-    
+    //MARK: Async/Await
+
+    func downloadWithAsync() async throws -> UIImage? {
+        
+        do {
+            let (data, response) = try await URLSession.shared.data(from: url, delegate: nil)
+            return handleResponse(data: data, response: response)
+         } catch {
+            throw error
+        }
+    }
 }
 
 struct DownloadImageAsync: View {
