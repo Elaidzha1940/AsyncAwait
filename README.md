@@ -43,10 +43,10 @@ https://source.unsplash.com/random/300×400
 
 Important ✌🏻 Async/Await.
 ========================
+
 Swift 5.0
 ----------
 
-```````````````ruby
  func addTitle() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.daraArray.append("Title1 : \(Thread.current)")
@@ -61,4 +61,3 @@ func addTitle() {
             self.dataArray.append("Title1 : \(Task.currentPriority)")
         }
     }
-```````````````
