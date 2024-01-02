@@ -5,7 +5,7 @@ Links for Random Images:
 ------------------------
 
 ```````````````````````ruby
-https://awik.io/generate-random-images-unsplash-without-using-api/ 
+https://source.unsplash.com/random/300×400
 
 ````````````````````````````````
  
