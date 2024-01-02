@@ -1,4 +1,4 @@
-Swift Concurrency: Async/Await, Combine, MainActor, Task, @escaping, 
+Swift Concurrency: Async/Await, Combine, MainActor, Task, @escaping...
 ============
 
 Links for Random Images: 
