@@ -7,7 +7,7 @@ Links for Random Images:
 ```````````````````````ruby
 https://source.unsplash.com/random/300×400
 
-````````````````````````````````
+```````````````````````
  
 ```````````````````````ruby
   //MARK: @escaping
