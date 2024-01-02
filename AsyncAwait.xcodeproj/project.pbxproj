@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E48661D12B448B0D00105B14 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48661D02B448B0D00105B14 /* TaskView.swift */; };
 		E4D9A1DD2B444FC800CBEB31 /* AsyncAwaitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D9A1DC2B444FC800CBEB31 /* AsyncAwaitView.swift */; };
 		E4DF25152B4307F500D0D8E5 /* AsyncAwaitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DF25142B4307F500D0D8E5 /* AsyncAwaitApp.swift */; };
 		E4DF25172B4307F500D0D8E5 /* DownloadImageAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DF25162B4307F500D0D8E5 /* DownloadImageAsync.swift */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E48661D02B448B0D00105B14 /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
 		E4D9A1DC2B444FC800CBEB31 /* AsyncAwaitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAwaitView.swift; sourceTree = "<group>"; };
 		E4DF25112B4307F500D0D8E5 /* AsyncAwait.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AsyncAwait.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4DF25142B4307F500D0D8E5 /* AsyncAwaitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAwaitApp.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 				E4DF25142B4307F500D0D8E5 /* AsyncAwaitApp.swift */,
 				E4DF25162B4307F500D0D8E5 /* DownloadImageAsync.swift */,
 				E4D9A1DC2B444FC800CBEB31 /* AsyncAwaitView.swift */,
+				E48661D02B448B0D00105B14 /* TaskView.swift */,
 				E4DF25182B4307F600D0D8E5 /* Assets.xcassets */,
 				E4DF251A2B4307F600D0D8E5 /* Preview Content */,
 			);
@@ -143,6 +146,7 @@
 				E4D9A1DD2B444FC800CBEB31 /* AsyncAwaitView.swift in Sources */,
 				E4DF25172B4307F500D0D8E5 /* DownloadImageAsync.swift in Sources */,
 				E4DF25152B4307F500D0D8E5 /* AsyncAwaitApp.swift in Sources */,
+				E48661D12B448B0D00105B14 /* TaskView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
