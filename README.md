@@ -7,7 +7,7 @@ https://awik.io/generate-random-images-unsplash-without-using-api/
 
 https://unsplash.com/developers
 
-````````````````````
+ ````````````````````
   //MARK: @escaping
 
     func dowloadWithEscaping(completionHandler: @escaping (_ image: UIImage?, _ error: Error?) -> Void) {
@@ -19,6 +19,7 @@ https://unsplash.com/developers
     }
  ````````````````````
 
+````````````````````
   //MARK: Combine
 
     func downloadWithCombine() -> AnyPublisher<UIImage?, Error> {
@@ -27,7 +28,9 @@ https://unsplash.com/developers
             .mapError({ $0 })
             .eraseToAnyPublisher()
     }
-    
+````````````````````
+
+````````````````````
   //MARK: async/await
 
     func downloadWithAsync() async throws -> UIImage? {
@@ -39,3 +42,4 @@ https://unsplash.com/developers
             throw error
         }
     }
+````````````````````
