@@ -28,13 +28,38 @@ class AsyncAwaitViewViewModel: ObservableObject {
     }
     
     func addAuthor1() async {
+        
+        // do this
         let author1 = "Author1 : \(Thread.current)"
         self.daraArray.append(author1)
         
+        // wait 2 seconds
         try? await Task.sleep(nanoseconds: 2_000_000_000)
         
+        // do all these
         let author2 = "Author2 : \(Thread.current)"
-        self.daraArray.append(author2)
+        await MainActor.run {
+            self.daraArray.append(author2)
+            
+            let author3 = "Author3 : \(Thread.current)"
+            self.daraArray.append(author3)
+        }
+        // then again wait
+        await addSome()
+    }
+    
+    func addSome() async {
+        
+        // wait 2 more seconds
+        try? await Task.sleep(nanoseconds: 2_000_000_000)
+        // and then some1
+        let some1 = "some1 : \(Thread.current)"
+        await MainActor.run {
+            self.daraArray.append(some1)
+            // and last some2
+            let some2 = "some2 : \(Thread.current)"
+            self.daraArray.append(some2)
+        }
     }
 }
 
@@ -50,10 +75,13 @@ struct AsyncAwaitView: View {
         }
         .onAppear {
             Task {
-               await viewModel.addAuthor1()
+                await viewModel.addAuthor1()
+                
+                let finalText = "Final Text : \(Thread.current)"
+                viewModel.daraArray.append(finalText)
             }
-//            viewModel.addTitle1()
-//            viewModel.addTitle2()
+            //            viewModel.addTitle1()
+            //            viewModel.addTitle2()
         }
     }
 }
