@@ -7,8 +7,8 @@
 //
 //  */
 
+// Swift Concurrency
 /*
- // Swift Concurrency
  
  // Async/Await
  // @escaping
@@ -23,8 +23,9 @@ class DownloadImageAsyncViewModel: ObservableObject {
     let loader = DownloadImageAsyncImageLoader()
     var cancellables = Set<AnyCancellable>()
     
-    func fetchImage() {
+    func fetchImage() async {
         
+        /*
         //MARK: @escaping
         
         //        loader .dowloadWithEscaping { [weak self] image, error in
@@ -41,9 +42,13 @@ class DownloadImageAsyncViewModel: ObservableObject {
 //                self?.image = image
 //            }
 //            .store(in: &cancellables )
+         */
         
         //MARK: Async/Await
-        
+       let image = try? await loader.downloadWithAsync()
+        await MainActor.run {
+            self.image = image
+        }
     }
 }
 
@@ -61,6 +66,7 @@ class DownloadImageAsyncImageLoader {
         }
         return image
     }
+    
     //MARK: @escaping
 
     func dowloadWithEscaping(completionHandler: @escaping (_ image: UIImage?, _ error: Error?) -> Void) {
@@ -108,7 +114,9 @@ struct DownloadImageAsync: View {
             }
         }
         .onAppear {
-            viewModel.fetchImage()
+            Task {
+               await viewModel.fetchImage()
+            }
         }
     }
 }
