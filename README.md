@@ -47,3 +47,24 @@ Tasks are a building block for writing Swift Concurrency code. Every time we are
 
 https://github.com/Elaidzha1940/AsyncAwait/assets/64445918/8894b2ac-f56c-4303-8b41-d833bfba608c
 
+Async Let: 
+----------
+
+```````````ruby
+
+  Task {
+                    do {
+                        async let fetchImage1 = fetchImage()
+                        async let fetchImage2 = fetchImage()
+                        async let fetchImage3 = fetchImage()
+                        async let fetchImage4 = fetchImage()
+                        async let fetchImage5 = fetchImage()
+                        async let fetchImage6 = fetchImage()
+                        
+                        let (image1, image2, image3, image4, image5, image6) = await (try fetchImage1, try fetchImage2, try fetchImage3, try fetchImage4, try fetchImage5, try fetchImage6)
+                        self.images.append(contentsOf: [image1, image2, image3, image4, image5, image6])
+                    } catch {
+                        
+                    }
+                }
+```````````
