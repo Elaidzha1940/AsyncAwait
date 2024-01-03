@@ -74,47 +74,55 @@ struct TaskView: View {
                     .frame(width: 350, height: 450)
             }
         }
-        .onAppear {
-            fetchImageTask = Task {
-                await viewModel.fetchImage()
-            }
-            
-            //            Task {
-            ////                print(Thread.current)
-            ////                print(Task.currentPriority)
-            //                await viewModel.fetchImage2()
-            //            }
-            
-            //            Task(priority: .high) {
-            //               //try? await Task.sleep(nanoseconds: 2_000_000_000)
-            //                await Task.yield()
-            //                print("high : \(Thread.current) : \(Task.currentPriority)")
-            //            }
-            //            Task(priority: .userInitiated) {
-            //                print("userInitiated : \(Thread.current) : \(Task.currentPriority)")
-            //            }
-            //            Task(priority: .medium) {
-            //                print("medium : \(Thread.current) : \(Task.currentPriority)")
-            //            }
-            //            Task(priority: .low) {
-            //                print("low : \(Thread.current) : \(Task.currentPriority)")
-            //            }
-            //            Task(priority: .utility) {
-            //                print("utility : \(Thread.current) : \(Task.currentPriority)")
-            //            }
-            //            Task(priority: .background) {
-            //                print("background : \(Thread.current) : \(Task.currentPriority)")
-            //            }
-            
-            //            Task(priority: .userInitiated) {
-            //                print("userInitiated : \(Thread.current) : \(Task.currentPriority)")
-            //
-            //                Task.detached  {
-            //                    print("userInitiated : \(Thread.current) : \(Task.currentPriority)")
-            //                }
-            //            }
-            
+        .task {
+            await viewModel.fetchImage()
         }
+        
+//        .onDisappear {
+//            fetchImageTask?.cancel()
+//        }
+        
+//        .onAppear {
+//            fetchImageTask = Task {
+//                await viewModel.fetchImage()
+//            }
+//            
+//            //            Task {
+//            ////                print(Thread.current)
+//            ////                print(Task.currentPriority)
+//            //                await viewModel.fetchImage2()
+//            //            }
+//            
+//            //            Task(priority: .high) {
+//            //               //try? await Task.sleep(nanoseconds: 2_000_000_000)
+//            //                await Task.yield()
+//            //                print("high : \(Thread.current) : \(Task.currentPriority)")
+//            //            }
+//            //            Task(priority: .userInitiated) {
+//            //                print("userInitiated : \(Thread.current) : \(Task.currentPriority)")
+//            //            }
+//            //            Task(priority: .medium) {
+//            //                print("medium : \(Thread.current) : \(Task.currentPriority)")
+//            //            }
+//            //            Task(priority: .low) {
+//            //                print("low : \(Thread.current) : \(Task.currentPriority)")
+//            //            }
+//            //            Task(priority: .utility) {
+//            //                print("utility : \(Thread.current) : \(Task.currentPriority)")
+//            //            }
+//            //            Task(priority: .background) {
+//            //                print("background : \(Thread.current) : \(Task.currentPriority)")
+//            //            }
+//            
+//            //            Task(priority: .userInitiated) {
+//            //                print("userInitiated : \(Thread.current) : \(Task.currentPriority)")
+//            //
+//            //                Task.detached  {
+//            //                    print("userInitiated : \(Thread.current) : \(Task.currentPriority)")
+//            //                }
+//            //            }
+//            
+//        }
     }
 }
 
