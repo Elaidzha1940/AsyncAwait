@@ -13,6 +13,12 @@ class TaskViewViewModel: ObservableObject {
     @Published var image: UIImage? = nil
     @Published var image2: UIImage? = nil
     
+//    func x in array {
+//        // do something
+//        
+//        try Task.checkCancellation()
+//    }
+    
     func fetchImage() async {
         try? await Task.sleep(nanoseconds: 5_000_000_000)
         do {
