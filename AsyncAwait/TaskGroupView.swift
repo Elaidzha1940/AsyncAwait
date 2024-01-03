@@ -12,17 +12,19 @@ import SwiftUI
 class TaskGroupDataManager {
     
     func fetchImagesAsyncLet() async throws -> [UIImage] {
-        async let fetchImage1 = fetchImage(urlString: "https://source.unsplash.com/random/300×500/?fruis")
-        async let fetchImage2 = fetchImage(urlString: "https://source.unsplash.com/random/300×500/?fruis")
-        async let fetchImage3 = fetchImage(urlString: "https://source.unsplash.com/random/300×500/?fruis")
-        async let fetchImage4 = fetchImage(urlString: "https://source.unsplash.com/random/300×500/?fruis")
-        async let fetchImage5 = fetchImage(urlString: "https://source.unsplash.com/random/300×500/?fruis")
-        async let fetchImage6 = fetchImage(urlString: "https://source.unsplash.com/random/300×500/?fruis")
+        async let fetchImage1 = fetchImage(urlString: "https://source.unsplash.com/random/300×500/?animals")
+        async let fetchImage2 = fetchImage(urlString: "https://source.unsplash.com/random/300×500/?animals")
+        async let fetchImage3 = fetchImage(urlString: "https://source.unsplash.com/random/300×500/?animals")
+        async let fetchImage4 = fetchImage(urlString: "https://source.unsplash.com/random/300×500/?animals")
+        async let fetchImage5 = fetchImage(urlString: "https://source.unsplash.com/random/300×500/?animals")
+        async let fetchImage6 = fetchImage(urlString: "https://source.unsplash.com/random/300×500/?animals ")
 
         let (image1, image2, image3, image4, image5, image6) = await (try fetchImage1, try fetchImage2, try fetchImage3, try fetchImage4, try fetchImage5, try fetchImage6)
         
         return [image1, image2, image3, image4, image5, image6]
     }
+    
+    
     
    private func fetchImage(urlString: String) async throws -> UIImage {
         guard let url = URL(string: urlString) else {
@@ -45,6 +47,13 @@ class TaskGroupDataManager {
 class TaskGroupViewModel: ObservableObject {
     @Published var images: [UIImage] = []
     let manager = TaskGroupDataManager()
+    
+    
+    func getImages() async {
+        if let iamges = try? await manager.fetchImagesAsyncLet() {
+            self.images.append(contentsOf: images)
+        }
+    }
 }
 
 struct TaskGroupView: View {
@@ -66,7 +75,10 @@ struct TaskGroupView: View {
                 }
                 .padding(.horizontal)
             }
-            .navigationTitle("Task Group 🥝")
+            .navigationTitle("Animals 🥝")
+            .task {
+                await viewModel.getImages()
+            }
         }
     }
 }
