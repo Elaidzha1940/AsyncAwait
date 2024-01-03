@@ -47,24 +47,3 @@ Tasks are a building block for writing Swift Concurrency code. Every time we are
 
 https://github.com/Elaidzha1940/AsyncAwait/assets/64445918/8894b2ac-f56c-4303-8b41-d833bfba608c
 
-Important ✌🏻 Async/Await: 
--------------------------
-
-```````````````````````ruby
-
-Swift 5.0
-
- func addTitle() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.daraArray.append("Title1 : \(Thread.current)")
-        }
-    }
-
-Swift 5.5
-
-func addTitle() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.dataArray.append("Title1 : \(Task.currentPriority)")
-        }
-    }
-```````````````````````
