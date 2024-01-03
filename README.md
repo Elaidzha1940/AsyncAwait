@@ -42,6 +42,11 @@ https://source.unsplash.com/random/300×400
     }
 ```````````````````````
 
+Tasks are a building block for writing Swift Concurrency code. Every time we are in an asynchronous context, we are actually performing work within a Task.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+https://github.com/Elaidzha1940/AsyncAwait/assets/64445918/8894b2ac-f56c-4303-8b41-d833bfba608c
+
 Important ✌🏻 Async/Await: 
 -------------------------
 
