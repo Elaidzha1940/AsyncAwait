@@ -12,19 +12,55 @@ import SwiftUI
 class TaskGroupDataManager {
     
     func fetchImagesAsyncLet() async throws -> [UIImage] {
-        async let fetchImage1 = fetchImage(urlString: "https://source.unsplash.com/random/300×500/?animals")
-        async let fetchImage2 = fetchImage(urlString: "https://source.unsplash.com/random/300×500/?animals")
-        async let fetchImage3 = fetchImage(urlString: "https://source.unsplash.com/random/300×500/?animals")
-        async let fetchImage4 = fetchImage(urlString: "https://source.unsplash.com/random/300×500/?animals")
-        async let fetchImage5 = fetchImage(urlString: "https://source.unsplash.com/random/300×500/?animals")
-        async let fetchImage6 = fetchImage(urlString: "https://source.unsplash.com/random/300×500/?animals ")
+        async let fetchImage1 = fetchImage(urlString: "https://source.unsplash.com/random/300×400")
+        async let fetchImage2 = fetchImage(urlString: "https://source.unsplash.com/random/300×400")
+        async let fetchImage3 = fetchImage(urlString: "https://source.unsplash.com/random/300×400")
+        async let fetchImage4 = fetchImage(urlString: "https://source.unsplash.com/random/300×400")
+        async let fetchImage5 = fetchImage(urlString: "https://source.unsplash.com/random/300×400")
+        async let fetchImage6 = fetchImage(urlString: "https://source.unsplash.com/random/300×400")
 
         let (image1, image2, image3, image4, image5, image6) = await (try fetchImage1, try fetchImage2, try fetchImage3, try fetchImage4, try fetchImage5, try fetchImage6)
         
         return [image1, image2, image3, image4, image5, image6]
     }
     
-    
+    func fetchImagesWithTaskGroup() async throws -> [UIImage] {
+        
+       return try await withThrowingTaskGroup(of: UIImage.self) { group in
+            var images: [UIImage] = []
+            
+           group.addTask {
+               try await self.fetchImage(urlString: "https://source.unsplash.com/random/300×400")
+           }
+        
+           group.addTask {
+               try await self.fetchImage(urlString: "https://source.unsplash.com/random/300×400")
+           }
+           
+           group.addTask {
+               try await self.fetchImage(urlString: "https://source.unsplash.com/random/300×400")
+           }
+           
+           group.addTask {
+               try await self.fetchImage(urlString: "https://source.unsplash.com/random/300×400")
+           }
+           
+           group.addTask {
+               try await self.fetchImage(urlString: "https://source.unsplash.com/random/300×400")
+           }
+           
+           group.addTask {
+               try await self.fetchImage(urlString: "https://source.unsplash.com/random/300×400")
+           }
+           
+           for try await image in group {
+               images.append(image )
+           }
+            
+            
+            return images
+        }
+    }
     
    private func fetchImage(urlString: String) async throws -> UIImage {
         guard let url = URL(string: urlString) else {
@@ -50,7 +86,7 @@ class TaskGroupViewModel: ObservableObject {
     
     
     func getImages() async {
-        if let iamges = try? await manager.fetchImagesAsyncLet() {
+        if let iamges = try? await manager.fetchImagesWithTaskGroup() {
             self.images.append(contentsOf: images)
         }
     }
@@ -68,9 +104,9 @@ struct TaskGroupView: View {
                     ForEach(viewModel.images, id: \.self) { image in
                         Image(uiImage: image)
                             .resizable()
-                            .scaledToFit()
+                            //.scaledToFit()
                             .cornerRadius(10)
-                            .frame(width: 180, height: 200)
+                            //.frame(width: 180, height: 200)
                     }
                 }
                 .padding(.horizontal)
