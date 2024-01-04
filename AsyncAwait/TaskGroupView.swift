@@ -16,53 +16,40 @@ class TaskGroupDataManager {
         async let fetchImage2 = fetchImage(urlString: "https://source.unsplash.com/random/300×400")
         async let fetchImage3 = fetchImage(urlString: "https://source.unsplash.com/random/300×400")
         async let fetchImage4 = fetchImage(urlString: "https://source.unsplash.com/random/300×400")
-        async let fetchImage5 = fetchImage(urlString: "https://source.unsplash.com/random/300×400")
-        async let fetchImage6 = fetchImage(urlString: "https://source.unsplash.com/random/300×400")
-
-        let (image1, image2, image3, image4, image5, image6) = await (try fetchImage1, try fetchImage2, try fetchImage3, try fetchImage4, try fetchImage5, try fetchImage6)
+  
         
-        return [image1, image2, image3, image4, image5, image6]
+        let (image1, image2, image3, image4) = await (try fetchImage1, try fetchImage2, try fetchImage3, try fetchImage4)
+        return [image1, image2, image3, image4]
     }
     
     func fetchImagesWithTaskGroup() async throws -> [UIImage] {
-        
-       return try await withThrowingTaskGroup(of: UIImage.self) { group in
+        let urlStrings = [
+            "https://source.unsplash.com/random/300×400",
+            "https://source.unsplash.com/random/300×400",
+            "https://source.unsplash.com/random/300×400",
+            "https://source.unsplash.com/random/300×400",
+            "https://source.unsplash.com/random/300×400",
+        ]
+        return try await withThrowingTaskGroup(of: UIImage?.self) { group in
             var images: [UIImage] = []
+            images.reserveCapacity(urlStrings.count)
             
-           group.addTask {
-               try await self.fetchImage(urlString: "https://source.unsplash.com/random/300×400")
-           }
-        
-           group.addTask {
-               try await self.fetchImage(urlString: "https://source.unsplash.com/random/300×400")
-           }
-           
-           group.addTask {
-               try await self.fetchImage(urlString: "https://source.unsplash.com/random/300×400")
-           }
-           
-           group.addTask {
-               try await self.fetchImage(urlString: "https://source.unsplash.com/random/300×400")
-           }
-           
-           group.addTask {
-               try await self.fetchImage(urlString: "https://source.unsplash.com/random/300×400")
-           }
-           
-           group.addTask {
-               try await self.fetchImage(urlString: "https://source.unsplash.com/random/300×400")
-           }
-           
-           for try await image in group {
-               images.append(image )
-           }
+            for urlStrings in urlStrings {
+                group.addTask {
+                    try? await self.fetchImage(urlString: urlStrings)
+                }
+            }
             
-            
+            for try await image in group {
+                if let image = image {
+                    images.append(image)
+                }
+            }
             return images
         }
     }
     
-   private func fetchImage(urlString: String) async throws -> UIImage {
+    private func fetchImage(urlString: String) async throws -> UIImage {
         guard let url = URL(string: urlString) else {
             throw URLError(.badURL)
         }
@@ -86,6 +73,7 @@ class TaskGroupViewModel: ObservableObject {
     
     
     func getImages() async {
+//        if (try? await manager.fetchImagesWithTaskGroup()) != nil {
         if let iamges = try? await manager.fetchImagesWithTaskGroup() {
             self.images.append(contentsOf: images)
         }
@@ -104,14 +92,14 @@ struct TaskGroupView: View {
                     ForEach(viewModel.images, id: \.self) { image in
                         Image(uiImage: image)
                             .resizable()
-                            //.scaledToFit()
+                            .scaledToFit()
                             .cornerRadius(10)
-                            //.frame(width: 180, height: 200)
+                            .frame(width: 300, height: 400)
                     }
                 }
                 .padding(.horizontal)
             }
-            .navigationTitle("Animals 🥝")
+            .navigationTitle("Animals 🐻")
             .task {
                 await viewModel.getImages()
             }

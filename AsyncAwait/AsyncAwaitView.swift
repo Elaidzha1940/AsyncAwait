@@ -30,14 +30,14 @@ class AsyncAwaitViewViewModel: ObservableObject {
     func addAuthor1() async {
         
         // do this
-        let author1 = "Author1 : \(Thread.current)"
+        let author1 = "Author1 : \(Task.currentPriority)"
         self.daraArray.append(author1)
         
         // wait 2 seconds
         try? await Task.sleep(nanoseconds: 2_000_000_000)
         
         // do all these
-        let author2 = "Author2 : \(Thread.current)"
+        let author2 = "Author2 : \(Task.currentPriority)"
         await MainActor.run {
             self.daraArray.append(author2)
             
@@ -54,7 +54,7 @@ class AsyncAwaitViewViewModel: ObservableObject {
         try? await Task.sleep(nanoseconds: 2_000_000_000)
         
         // and then some1
-        let some1 = "some1 : \(Thread.current)"
+        let some1 = "some1 : \(Task.currentPriority)"
         await MainActor.run {
             self.daraArray.append(some1)
             
@@ -80,7 +80,7 @@ struct AsyncAwaitView: View {
                 await viewModel.addAuthor1()
                 await viewModel.addSome()
                 
-                let finalText = "Final Text : \(Thread.current)"
+                let finalText = "Final Text : \(Task.currentPriority)"
                 viewModel.daraArray.append(finalText)
             }
             //            viewModel.addTitle1()
