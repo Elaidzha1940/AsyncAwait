@@ -71,3 +71,36 @@ Async Let:
 
 https://github.com/Elaidzha1940/AsyncAwait/assets/64445918/1b94bd61-8140-4276-b1ac-1dbdae7b11b2
 
+withCheckedThrowingContinuation:
+--------------------------------
+
+``````````````ruby
+import SwiftUI
+
+class CheckedContinuationNetworkManager {
+    
+    func getData(url: URL) async throws -> Data {
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url, delegate: nil)
+            return data
+        } catch {
+            throw error
+        }
+    }
+    
+    func getData2(url: URL) async throws -> Data {
+        return try await withCheckedThrowingContinuation { continuation in
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                if let data = data {
+                    continuation.resume(returning: data)
+                } else if let error = error {
+                    continuation.resume(throwing: error)
+                } else {
+                    continuation.resume(throwing: URLError(.badURL))
+                }
+            }
+            .resume()
+        }
+    }
+}
+``````````````
