@@ -21,12 +21,31 @@ class CheckedContinuationNetworkManager {
     }
     
     func getData2(url: URL) async throws -> Data {
-       return try await withCheckedContinuation { continuation in
-           URLSession.shared.dataTask(with: url) { data, response, error in
-               if let data = data {
-                   continuation.resume(returning: data)
-               }
-           }
+        return try await withCheckedThrowingContinuation { continuation in
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                if let data = data {
+                    continuation.resume(returning: data)
+                } else if let error = error {
+                    continuation.resume(throwing: error)
+                } else {
+                    continuation.resume(throwing: URLError(.badURL))
+                }
+            }
+            .resume()
+        }
+    }
+    
+    func getPersonImageFromDataBase(completionHandler: @escaping (_ image: UIImage) -> ()) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            completionHandler(UIImage(systemName: "person.fill")!)
+        }
+    }
+    
+    func getPersonImageFromDataBase() async -> UIImage {
+        await withCheckedContinuation { continuation in
+            getPersonImageFromDataBase { image in
+                continuation.resume(returning: image)
+            }
         }
     }
 }
@@ -39,7 +58,7 @@ class CheckedContinuationViewModel: ObservableObject {
         guard let url = URL(string: "https://source.unsplash.com/random/300×400") else { return }
         
         do {
-           let data = try await networkManager.getData(url: url)
+            let data = try await networkManager.getData2(url: url)
             
             if let image = UIImage(data: data) {
                 await MainActor.run {
@@ -49,6 +68,16 @@ class CheckedContinuationViewModel: ObservableObject {
         } catch {
             print(error)
         }
+    }
+    
+//    func getPersonImage() {
+//        networkManager.getPersonImageFromDataBase { [weak self] image in
+//            self?.image = image
+//        }
+//    }
+    
+    func getPersonImage() async {
+        self.image = await networkManager.getPersonImageFromDataBase()
     }
 }
 
@@ -67,7 +96,8 @@ struct CheckedContinuationView: View {
             }
         }
         .task {
-            await viewModel.getImage()
+            //            await viewModel.getImage()
+            await viewModel.getPersonImage()
         }
     }
 }
